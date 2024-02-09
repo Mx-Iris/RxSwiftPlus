@@ -2,15 +2,20 @@
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
+import CompilerPluginSupport
 
 let package = Package(
     name: "RxSwiftPlus",
-    platforms: [.iOS(.v12), .macOS(.v10_14), .tvOS(.v12), .watchOS(.v5)],
+    platforms: [.iOS(.v13), .macOS(.v10_15), .tvOS(.v13), .watchOS(.v6)],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "RxSwiftPlus",
-            targets: ["RxSwiftPlus"]),
+            targets: ["RxSwiftPlus"]
+        ),
+        .library(
+            name: "RxSwiftPlusMacro",
+            targets: ["RxSwiftPlusMacro"]
+        ),
     ],
     dependencies: [
         .package(
@@ -21,10 +26,9 @@ let package = Package(
             url: "https://github.com/MxIris-Library-Forks/Kingfisher",
             branch: "master"
         ),
+        .SwiftSyntax,
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "RxSwiftPlus",
             dependencies: [
@@ -33,7 +37,21 @@ let package = Package(
                 .product(name: "RxRelay", package: "RxSwift"),
                 .product(name: "Kingfisher", package: "Kingfisher"),
             ]
-            
+
+        ),
+        .target(
+            name: "RxSwiftPlusMacro",
+            dependencies: [
+                "RxSwiftPlusMacroPlugin",
+            ]
+        ),
+        .macro(
+            name: "RxSwiftPlusMacroPlugin",
+            dependencies: [
+                .SwiftSyntax,
+                .SwiftSyntaxMacros,
+                .SwiftCompilerPlugin,
+            ]
         ),
         .testTarget(
             name: "RxSwiftPlusTests",
@@ -41,3 +59,29 @@ let package = Package(
         ),
     ]
 )
+
+extension Package.Dependency {
+    static let SwiftSyntax = Package.Dependency.package(
+        url: "https://github.com/apple/swift-syntax.git",
+        from: "509.0.0"
+    )
+}
+
+extension Target.Dependency {
+    static let SwiftSyntax = Target.Dependency.product(
+        name: "SwiftSyntax",
+        package: "swift-syntax"
+    )
+    static let SwiftSyntaxMacros = Target.Dependency.product(
+        name: "SwiftSyntaxMacros",
+        package: "swift-syntax"
+    )
+    static let SwiftCompilerPlugin = Target.Dependency.product(
+        name: "SwiftCompilerPlugin",
+        package: "swift-syntax"
+    )
+    static let SwiftSyntaxMacrosTestSupport = Target.Dependency.product(
+        name: "SwiftSyntaxMacrosTestSupport",
+        package: "swift-syntax"
+    )
+}

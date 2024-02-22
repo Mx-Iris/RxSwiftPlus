@@ -13,6 +13,10 @@ let package = Package(
             targets: ["RxSwiftPlus"]
         ),
         .library(
+            name: "RxKingfisherPlus",
+            targets: ["RxKingfisherPlus"]
+        ),
+        .library(
             name: "RxSwiftPlusMacro",
             targets: ["RxSwiftPlusMacro"]
         ),
@@ -35,9 +39,16 @@ let package = Package(
                 .product(name: "RxSwift", package: "RxSwift"),
                 .product(name: "RxCocoa", package: "RxSwift"),
                 .product(name: "RxRelay", package: "RxSwift"),
+            ]
+        ),
+        .target(
+            name: "RxKingfisherPlus",
+            dependencies: [
+                .product(name: "RxSwift", package: "RxSwift"),
+                .product(name: "RxCocoa", package: "RxSwift"),
+                .product(name: "RxRelay", package: "RxSwift"),
                 .product(name: "Kingfisher", package: "Kingfisher"),
             ]
-
         ),
         .target(
             name: "RxSwiftPlusMacro",
@@ -51,11 +62,14 @@ let package = Package(
                 .SwiftSyntax,
                 .SwiftSyntaxMacros,
                 .SwiftCompilerPlugin,
+                .SwiftSyntaxBuilder,
             ]
         ),
         .testTarget(
             name: "RxSwiftPlusTests",
-            dependencies: ["RxSwiftPlus"]
+            dependencies: [
+                "RxSwiftPlus"
+            ]
         ),
     ]
 )
@@ -78,6 +92,10 @@ extension Target.Dependency {
     )
     static let SwiftCompilerPlugin = Target.Dependency.product(
         name: "SwiftCompilerPlugin",
+        package: "swift-syntax"
+    )
+    static let SwiftSyntaxBuilder = Target.Dependency.product(
+        name: "SwiftSyntaxBuilder",
         package: "swift-syntax"
     )
     static let SwiftSyntaxMacrosTestSupport = Target.Dependency.product(

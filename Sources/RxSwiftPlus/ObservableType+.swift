@@ -44,7 +44,7 @@ extension ObservableType where Element == Void {
             onDisposed: onDisposed
         )
     }
-    
+
     public func subscribeOnNext(_ onNext: @escaping (() -> Void)) -> Disposable {
         subscribe(
             onNext: { _ in
@@ -87,7 +87,7 @@ extension SharedSequenceConvertibleType where SharingStrategy == DriverSharingSt
             onDisposed: onDisposed
         )
     }
-    
+
     public func driveOnNext(_ onNext: @escaping (() -> Void)) -> Disposable {
         drive(
             onNext: { _ in
@@ -145,19 +145,11 @@ extension SharedSequenceConvertibleType where SharingStrategy == SignalSharingSt
     public func emitOnNext(_ onNext: @escaping (Element) -> Void) -> Disposable {
         emit(onNext: onNext, onCompleted: nil, onDisposed: nil)
     }
-    
-    public func mapToVoid() -> Signal<Void> {
-        map { _ in }
-    }
 }
 
 extension SharedSequenceConvertibleType where SharingStrategy == DriverSharingStrategy {
     public func driveOnNext(_ onNext: @escaping ((Element) -> Void)) -> Disposable {
         drive(onNext: onNext, onCompleted: nil, onDisposed: nil)
-    }
-    
-    public func mapToVoid() -> Driver<Void> {
-        map { _ in }
     }
 }
 

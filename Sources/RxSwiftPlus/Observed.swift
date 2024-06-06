@@ -2,6 +2,7 @@ import RxSwift
 import RxCocoa
 
 @propertyWrapper
+@MainActor
 public struct Observed<Element> {
     private let storage: BehaviorRelay<Element>
 

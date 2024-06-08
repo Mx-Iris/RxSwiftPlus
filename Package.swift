@@ -30,6 +30,10 @@ let package = Package(
             url: "https://github.com/MxIris-Library-Forks/Kingfisher",
             branch: "master"
         ),
+        .package(
+            url: "https://github.com/sindresorhus/Defaults",
+            .upToNextMajor(from: "7.0.0")
+        ),
         .SwiftSyntax,
     ],
     targets: [
@@ -48,6 +52,15 @@ let package = Package(
                 .product(name: "RxCocoa", package: "RxSwift"),
                 .product(name: "RxRelay", package: "RxSwift"),
                 .product(name: "Kingfisher", package: "Kingfisher"),
+            ]
+        ),
+        .target(
+            name: "RxDefaultsPlus",
+            dependencies: [
+                .product(name: "RxSwift", package: "RxSwift"),
+                .product(name: "RxCocoa", package: "RxSwift"),
+                .product(name: "RxRelay", package: "RxSwift"),
+                .product(name: "Defaults", package: "Defaults"),
             ]
         ),
         .target(

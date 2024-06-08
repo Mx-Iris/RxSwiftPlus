@@ -17,6 +17,10 @@ let package = Package(
             targets: ["RxKingfisherPlus"]
         ),
         .library(
+            name: "RxDefaultsPlus",
+            targets: ["RxDefaultsPlus"]
+        ),
+        .library(
             name: "RxSwiftPlusMacro",
             targets: ["RxSwiftPlusMacro"]
         ),

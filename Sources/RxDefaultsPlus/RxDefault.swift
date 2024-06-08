@@ -41,7 +41,7 @@ struct AnyDefaultsSerializable<Element: Codable>: Codable, Defaults.Serializable
 import Combine
 
 @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-extension Publisher {
+private extension Publisher {
     /// Returns an Observable<Output> representing the underlying
     /// Publisher. Upon subscription, the Publisher's sink pushes
     /// events into the Observable. Upon disposing of the subscription,

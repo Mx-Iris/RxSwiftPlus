@@ -23,7 +23,12 @@ public struct UserDefault<Element: Codable> {
     }
 
     public var projectedValue: Observable<Element> {
-        suite.rx.observe(Element.self, key).compactMap { $0 }.startWith(wrappedValue).share()
+        suite.rx.observe(Data.self, key).compactMap { data in
+            guard let data, let element = try? JSONDecoder().decode(Element.self, from: data) else {
+                return defaultValue
+            }
+            return element
+        }.startWith(wrappedValue).share()
     }
 
     public init(key: String, defaultValue: Element, suite: UserDefaults = .standard) {

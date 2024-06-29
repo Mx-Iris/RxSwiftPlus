@@ -12,6 +12,7 @@ public struct UserDefault<Element: Codable> {
         nonmutating set {
             if let data = try? JSONEncoder().encode(newValue) {
                 suite.setValue(data, forKey: key)
+                suite.synchronize()
             }
         }
         get {

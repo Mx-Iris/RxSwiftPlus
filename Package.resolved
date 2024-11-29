@@ -3,10 +3,10 @@
     {
       "identity" : "kingfisher",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/MxIris-Library-Forks/Kingfisher",
+      "location" : "https://github.com/onevcat/Kingfisher",
       "state" : {
-        "branch" : "master",
-        "revision" : "dcd5693a0298922bc019782ef411be5f80dcee6c"
+        "revision" : "b6256f191b4c1d8d09f4df94bae69e5ac6e42c81",
+        "version" : "8.1.1"
       }
     },
     {
@@ -14,14 +14,14 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveX/RxSwift",
       "state" : {
-        "revision" : "9dcaa4b333db437b0fbfaf453fad29069044a8b4",
-        "version" : "6.6.0"
+        "revision" : "c7c7d2cf50a3211fe2843f76869c698e4e417930",
+        "version" : "6.8.0"
       }
     },
     {
       "identity" : "swift-syntax",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-syntax.git",
+      "location" : "https://github.com/swiftlang/swift-syntax.git",
       "state" : {
         "revision" : "64889f0c732f210a935a0ad7cda38f77f876262d",
         "version" : "509.1.1"

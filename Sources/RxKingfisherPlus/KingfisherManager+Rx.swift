@@ -27,7 +27,7 @@ extension Reactive where Base == KingfisherManager {
 
 }
 
-extension KingfisherManager: ReactiveCompatible {
+extension KingfisherManager: @retroactive ReactiveCompatible {
     public var rx: Reactive<KingfisherManager> {
         get { return Reactive(self) }
         set { }

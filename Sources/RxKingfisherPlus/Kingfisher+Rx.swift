@@ -1,6 +1,7 @@
-import RxCocoa
-import RxSwift
+@preconcurrency import RxCocoa
+@preconcurrency import RxSwift
 import Kingfisher
+import RxSwiftPlus
 
 #if canImport(AppKit) && !targetEnvironment(macCatalyst)
 import AppKit
@@ -23,13 +24,13 @@ extension KingfisherWrapper {
             options: KingfisherOptionsInfo? = nil
         ) -> Binder<Resource?> {
             // `base.base` is the `Kingfisher` class' associated `ImageView`.
-            return Binder(wrapper.base) { imageView, image in
+            return Binder(wrapper.base, mainActorBinding: { imageView, image in
                 imageView.kf.setImage(
                     with: image,
                     placeholder: placeholder,
                     options: options
                 )
-            }
+            })
         }
 
         public func setImage(
@@ -37,7 +38,7 @@ extension KingfisherWrapper {
             placeholder: KFCrossPlatformImage? = nil,
             options: KingfisherOptionsInfo? = nil
         ) -> Single<KFCrossPlatformImage> {
-            Single.create { [wrapper] single in
+            Single.create(mainActorSubscribe: { [wrapper] single in
                 let task = wrapper.setImage(
                     with: source,
                     placeholder: placeholder,
@@ -53,7 +54,7 @@ extension KingfisherWrapper {
                 )
 
                 return Disposables.create { task?.cancel() }
-            }
+            })
         }
 
         public func setImage(

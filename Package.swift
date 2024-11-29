@@ -26,18 +26,8 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(
-            url: "https://github.com/ReactiveX/RxSwift",
-            .upToNextMajor(from: "6.0.0")
-        ),
-        .package(
-            url: "https://github.com/MxIris-Library-Forks/Kingfisher",
-            branch: "master"
-        ),
-//        .package(
-//            url: "https://github.com/sindresorhus/Defaults",
-//            .upToNextMajor(from: "8.0.0")
-//        ),
+        .RxSwift,
+        .Kingfisher,
         .SwiftSyntax,
     ],
     targets: [
@@ -52,6 +42,7 @@ let package = Package(
         .target(
             name: "RxKingfisherPlus",
             dependencies: [
+                "RxSwiftPlus",
                 .product(name: "RxSwift", package: "RxSwift"),
                 .product(name: "RxCocoa", package: "RxSwift"),
                 .product(name: "RxRelay", package: "RxSwift"),
@@ -61,6 +52,7 @@ let package = Package(
         .target(
             name: "RxDefaultsPlus",
             dependencies: [
+                "RxSwiftPlus",
                 .product(name: "RxSwift", package: "RxSwift"),
                 .product(name: "RxCocoa", package: "RxSwift"),
                 .product(name: "RxRelay", package: "RxSwift"),
@@ -85,7 +77,7 @@ let package = Package(
         .testTarget(
             name: "RxSwiftPlusTests",
             dependencies: [
-                "RxSwiftPlus"
+                "RxSwiftPlus",
             ]
         ),
     ]
@@ -93,8 +85,16 @@ let package = Package(
 
 extension Package.Dependency {
     static let SwiftSyntax = Package.Dependency.package(
-        url: "https://github.com/apple/swift-syntax.git",
+        url: "https://github.com/swiftlang/swift-syntax.git",
         from: "509.0.0"
+    )
+    static let Kingfisher = Package.Dependency.package(
+        url: "https://github.com/onevcat/Kingfisher",
+        .upToNextMajor(from: "8.0.0")
+    )
+    static let RxSwift = Package.Dependency.package(
+        url: "https://github.com/ReactiveX/RxSwift",
+        .upToNextMajor(from: "6.0.0")
     )
 }
 

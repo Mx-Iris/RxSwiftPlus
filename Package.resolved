@@ -21,9 +21,9 @@
     {
       "identity" : "swift-syntax",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swiftlang/swift-syntax.git",
+      "location" : "https://github.com/swift-precompiled/swift-syntax.git",
       "state" : {
-        "revision" : "f99ae8aa18f0cf0d53481901f88a0991dc3bd4a2",
+        "revision" : "fc197a24fb2e77609fbe3d94624e36f84d758099",
         "version" : "601.0.1"
       }
     }

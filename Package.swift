@@ -85,7 +85,7 @@ let package = Package(
 
 extension Package.Dependency {
     static let SwiftSyntax = Package.Dependency.package(
-        url: "https://github.com/swiftlang/swift-syntax.git",
+        url: "https://github.com/swift-precompiled/swift-syntax.git",
         from: "601.0.1"
     )
     static let Kingfisher = Package.Dependency.package(

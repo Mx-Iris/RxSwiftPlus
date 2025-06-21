@@ -1,5 +1,4 @@
 import RxSwift
-import Foundation
 import ObjectiveC
 
 private var disposeBagContext: UInt8 = 0

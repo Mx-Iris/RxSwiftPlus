@@ -1,4 +1,3 @@
-import Foundation
 import RxSwift
 
 extension ReactiveCompatible where Self: AnyObject {

@@ -1,14 +1,6 @@
-//
-//  ActivityIndicator.swift
-//  RxExample
-//
-//  Created by Krunoslav Zaher on 10/18/15.
-//  Copyright © 2015 Krunoslav Zaher. All rights reserved.
-//
-
 import RxSwift
 import RxCocoa
-import Foundation
+import Foundation.NSLock
 
 private struct ActivityToken<E>: ObservableConvertibleType, Disposable {
     private let _source: Observable<E>
@@ -54,13 +46,13 @@ public class ActivityIndicator: SharedSequenceConvertibleType {
         })
     }
 
-    private func increment() {
+    fileprivate func increment() {
         _lock.lock()
         _relay.accept(_relay.value + 1)
         _lock.unlock()
     }
 
-    private func decrement() {
+    fileprivate func decrement() {
         _lock.lock()
         _relay.accept(_relay.value - 1)
         _lock.unlock()
@@ -74,5 +66,14 @@ public class ActivityIndicator: SharedSequenceConvertibleType {
 extension ObservableConvertibleType {
     public func trackActivity(_ activityIndicator: ActivityIndicator) -> Observable<Element> {
         return activityIndicator.trackActivityOfObservable(self)
+    }
+}
+
+extension SharedSequenceConvertibleType {
+    public func trackActivity(_ activityIndicator: ActivityIndicator) -> SharedSequence<SharingStrategy, Element> {
+        return asSharedSequence().do(
+            onSubscribe: { activityIndicator.increment() },
+            onDispose: { activityIndicator.decrement() }
+        )
     }
 }

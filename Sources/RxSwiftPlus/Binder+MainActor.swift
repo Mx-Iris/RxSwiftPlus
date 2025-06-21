@@ -1,10 +1,3 @@
-//
-//  Binder.swift
-//  RxSwiftPlus
-//
-//  Created by JH on 11/29/24.
-//
-
 import RxSwift
 import RxCocoa
 

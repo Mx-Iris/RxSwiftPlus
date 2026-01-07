@@ -2,7 +2,7 @@ import RxSwift
 import RxCocoa
 
 @propertyWrapper
-public struct Observed<Element> {
+public final class Observed<Element> {
     private let storage: BehaviorRelay<Element>
 
     public var wrappedValue: Element {

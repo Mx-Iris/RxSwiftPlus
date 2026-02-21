@@ -90,3 +90,39 @@ extension SharedSequenceConvertibleType {
         return map { _ in }
     }
 }
+
+// MARK: - ExpressibleByUnicodeScalarLiteral
+extension SharedSequence: @retroactive ExpressibleByUnicodeScalarLiteral where Element == String {
+    public typealias UnicodeScalarLiteralType = Element
+
+    public init(unicodeScalarLiteral value: UnicodeScalarLiteralType) {
+        self = .just(value)
+    }
+}
+
+// MARK: - ExpressibleByExtendedGraphemeClusterLiteral
+extension SharedSequence: @retroactive ExpressibleByExtendedGraphemeClusterLiteral where Element == String {
+    public typealias ExtendedGraphemeClusterLiteralType = Element
+
+    public init(extendedGraphemeClusterLiteral value: ExtendedGraphemeClusterLiteralType) {
+        self = .just(value)
+    }
+}
+
+// MARK: - ExpressibleByStringLiteral
+extension SharedSequence: @retroactive ExpressibleByStringLiteral where Element == String {
+    public typealias StringLiteralType = Element
+
+    public init(stringLiteral value: StringLiteralType) {
+        self = .just(value)
+    }
+}
+
+
+extension SharedSequence: @retroactive ExpressibleByBooleanLiteral where Element == Bool {
+    public typealias BooleanLiteralType = Element
+    
+    public init(booleanLiteral value: BooleanLiteralType) {
+        self = .just(value)
+    }
+}

@@ -1,12 +1,13 @@
 import RxSwift
 import RxCocoa
 
+@frozen
 @propertyWrapper
-public final class Observed<Element> {
-    private let storage: BehaviorRelay<Element>
+public struct Observed<Value> {
+    private let storage: BehaviorRelay<Value>
 
-    public var wrappedValue: Element {
-        set {
+    public var wrappedValue: Value {
+        nonmutating set {
             storage.accept(newValue)
         }
         get {
@@ -14,11 +15,19 @@ public final class Observed<Element> {
         }
     }
 
-    public init(wrappedValue: Element) {
+    public init(wrappedValue: Value) {
         self.storage = .init(value: wrappedValue)
     }
 
-    public var projectedValue: BehaviorRelay<Element> {
+    public var projectedValue: BehaviorRelay<Value> {
         storage
+    }
+}
+
+extension Observed: Sendable where Value: Sendable {}
+
+extension Observed where Value: ExpressibleByNilLiteral {
+    @inlinable public init() {
+        self.init(wrappedValue: nil)
     }
 }

@@ -7,3 +7,9 @@ extension PublishRelay where Element == Void {
         accept(())
     }
 }
+
+extension BehaviorRelay where Element == Void {
+    public func accept() {
+        accept(())
+    }
+}

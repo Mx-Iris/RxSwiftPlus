@@ -9,3 +9,8 @@ extension PublishSubject where Element == Void {
 }
 
 
+extension BehaviorSubject where Element == Void {
+    public func onNext() {
+        onNext(())
+    }
+}

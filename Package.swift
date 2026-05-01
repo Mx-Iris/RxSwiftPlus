@@ -1,7 +1,7 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
-import PackageDescription
+@preconcurrency import PackageDescription
 import CompilerPluginSupport
 
 let package = Package(
@@ -80,13 +80,14 @@ let package = Package(
                 "RxSwiftPlus",
             ]
         ),
-    ]
+    ],
+    swiftLanguageModes: [.v5]
 )
 
 extension Package.Dependency {
     static let SwiftSyntax = Package.Dependency.package(
         url: "https://github.com/swiftlang/swift-syntax.git",
-        from: "601.0.1"
+        "509.1.0" ..< "604.0.0"
     )
     static let Kingfisher = Package.Dependency.package(
         url: "https://github.com/onevcat/Kingfisher",

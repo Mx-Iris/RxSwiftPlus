@@ -1,5 +1,5 @@
 import RxSwift
-import RxCocoa
+@preconcurrency import RxCocoa
 
 @frozen
 @propertyWrapper
@@ -17,6 +17,10 @@ public struct Observed<Value> {
 
     public init(wrappedValue: Value) {
         self.storage = .init(value: wrappedValue)
+    }
+    
+    public init(relay: BehaviorRelay<Value>) {
+        self.storage = relay
     }
 
     public var projectedValue: BehaviorRelay<Value> {

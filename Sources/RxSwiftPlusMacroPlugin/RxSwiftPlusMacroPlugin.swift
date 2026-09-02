@@ -7,6 +7,7 @@ struct RxSwiftPlusMacroPlugin: CompilerPlugin {
     var providingMacros: [Macro.Type] {
         [
             ReactiveExtensionMacro.self,
+            RxObservedMacro.self,
         ]
     }
 }

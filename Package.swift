@@ -63,6 +63,8 @@ let package = Package(
             name: "RxSwiftPlusMacro",
             dependencies: [
                 "RxSwiftPlusMacroPlugin",
+                "RxSwiftPlus",
+                .product(name: "RxRelay", package: "RxSwift"),
             ]
         ),
         .macro(
@@ -78,6 +80,14 @@ let package = Package(
             name: "RxSwiftPlusTests",
             dependencies: [
                 "RxSwiftPlus",
+                "RxSwiftPlusMacro",
+            ]
+        ),
+        .testTarget(
+            name: "RxSwiftPlusMacroTests",
+            dependencies: [
+                "RxSwiftPlusMacroPlugin",
+                .SwiftSyntaxMacrosTestSupport,
             ]
         ),
     ],
